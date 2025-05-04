@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API requests</title>
+
+  <style>
+    .card {
+      display: none;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 300px;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .followers {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <button id="btn">Click me</button>
+  <button class="btn">Clear</button>
+
+  <div class="card" id="profileCard">
+    <img id="profilePhoto" src="" alt="Profile Photo">
+    <div class="followers" id="followersCount"></div>
+  </div>
+
+
+</body>
+<script>
+  const url = 'https://api.github.com/users/hiteshchoudhary'
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url)
+  let data;
+
+  const a = document.getElementById('btn').addEventListener('click', () => {
+        document.getElementById('profilePhoto').src = data.avatar_url;
+        document.querySelector('.followers').textContent = data.followers;
+        document.getElementById('profileCard').style.display = 'grid'
+      })
+
+  document.querySelector('.btn').addEventListener('click', ()=>{
+    document.getElementById('profileCard').style.display = 'none'
+  })
+
+
+  xhr.onreadystatechange = () => {
+    console.log(xhr.readyState);
+    if (xhr.readyState === 4) {
+      data = JSON.parse(xhr.responseText)
+    }
+  }
+  xhr.send();
+</script>
+
+</html>
