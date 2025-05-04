@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body style="background-color: grey; color:black" id="body">
+  <center>
+    <h1>Start Should change Background color every second</h1>
+    <h2>Stop should stop the Background color when you clicked...stop</h2>
+
+    <button id="start">
+      Start
+    </button>
+
+    <button id="stop">Stop</button>
+  </center>
+</body>
+
+<script>
+
+  const arr = ['black', 'orange', 'blue', 'red', 'yellow','pink','aqua', 'white']
+  let i = 0
+
+
+  function changeBackgroundColor() {
+    document.getElementById('body').style.backgroundColor = arr[i]
+    i = (i + 1) % arr.length;
+  }
+
+  let a;
+  document.querySelector('#start').addEventListener('click', () => {
+    a = setInterval(changeBackgroundColor, 1000)
+    console.log("Start Chnaging Color..");
+
+  })
+
+  document.querySelector('#stop').addEventListener('click', () => {
+    clearInterval(a)
+    console.log("Stoped Changing..");
+
+  })
+</script>
+
+</html>
